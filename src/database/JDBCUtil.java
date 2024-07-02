@@ -12,7 +12,7 @@ public class JDBCUtil {
 		try {
 			// Đăng ký Mysql Driver với DriverManager
 //			DriverManager.registerDriver(new Driver());
-			String url = "jdbc:mySQL://localhost:3306/ontap";
+			String url = "jdbc:mySQL://localhost:3306/nhasach";
 			String username = "root";
 			String password = "";
 
