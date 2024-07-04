@@ -1,9 +1,7 @@
 package test;
 
-import java.util.ArrayList;
-
-import dao.SachDAO;
-import model.Sach;
+import dao.UserDAO;
+import model.User;
 
 public class CRUD_Database {
 	public static void main(String[] args) {
@@ -50,9 +48,15 @@ public class CRUD_Database {
 //		Sach sachFind = SachDAO.getInstance().selectById(find);
 //		System.out.println(sachFind);
 
-		ArrayList<Sach> sachFindConditions = SachDAO.getInstance().selectByCondition("giaBan>7000");
-		for (Sach sach : sachFindConditions) {
-			System.out.println(sach.toString());
-		}
+//		ArrayList<Sach> sachFindConditions = SachDAO.getInstance().selectByCondition("giaBan>7000");
+//		for (Sach sach : sachFindConditions) {
+//			System.out.println(sach.toString());
+//		}
+
+//		PreparedStatement test
+
+		User u1 = new User("phucnguyen1", "123123", "Nguyễn Thanh Phúc");
+
+		UserDAO.getInstance().insert(u1);
 	}
 }
