@@ -1,6 +1,7 @@
 package dao;
 
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 
@@ -110,20 +111,105 @@ public class SachDAO implements DAOInterface<Sach> {
 
 	@Override
 	public ArrayList<Sach> selectAll() {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<Sach> ketQua = new ArrayList<Sach>();
+		try {
+			// Bước 1: Tạo kết nối đến CSDL
+			Connection con = JDBCUtil.getConnection();
+
+			// Bước 2: Tạo ra đối tượng statement
+			Statement st = con.createStatement();
+
+			// Bước 3: Thực thi câu lệnh SQL
+			String sql = "SELECT * FROM sach";
+
+			ResultSet rs = st.executeQuery(sql);
+
+			// Bước 4: Xử lý kết quả
+			while (rs.next()) {
+				String id = rs.getString("id");
+				String tenSach = rs.getString("tenSach");
+				float giaBan = rs.getFloat("giaBan");
+				int namXuatBan = rs.getInt("namXuatBan");
+
+				Sach sach = new Sach(id, tenSach, giaBan, namXuatBan);
+
+				ketQua.add(sach);
+			}
+
+			// Bước 5: Ngắt kết nối cơ sở dữ liệu
+			JDBCUtil.closeConnection(con);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return ketQua;
 	}
 
 	@Override
 	public Sach selectById(Sach t) {
-		// TODO Auto-generated method stub
-		return null;
+		Sach ketQua = null;
+		try {
+			// Bước 1: Tạo kết nối đến CSDL
+			Connection con = JDBCUtil.getConnection();
+
+			// Bước 2: Tạo ra đối tượng statement
+			Statement st = con.createStatement();
+
+			// Bước 3: Thực thi câu lệnh SQL
+			String sql = "SELECT * FROM sach where id='" + t.getId() + "'";
+
+			ResultSet rs = st.executeQuery(sql);
+
+			// Bước 4: Xử lý kết quả
+			while (rs.next()) {
+				String id = rs.getString("id");
+				String tenSach = rs.getString("tenSach");
+				float giaBan = rs.getFloat("giaBan");
+				int namXuatBan = rs.getInt("namXuatBan");
+
+				ketQua = new Sach(id, tenSach, giaBan, namXuatBan);
+			}
+
+			// Bước 5: Ngắt kết nối cơ sở dữ liệu
+			JDBCUtil.closeConnection(con);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return ketQua;
 	}
 
 	@Override
 	public ArrayList<Sach> selectByCondition(String condition) {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<Sach> ketQua = new ArrayList<Sach>();
+		try {
+			// Bước 1: Tạo kết nối đến CSDL
+			Connection con = JDBCUtil.getConnection();
+
+			// Bước 2: Tạo ra đối tượng statement
+			Statement st = con.createStatement();
+
+			// Bước 3: Thực thi câu lệnh SQL
+			String sql = "SELECT * FROM sach where " + condition;
+
+			ResultSet rs = st.executeQuery(sql);
+
+			// Bước 4: Xử lý kết quả
+			while (rs.next()) {
+				String id = rs.getString("id");
+				String tenSach = rs.getString("tenSach");
+				float giaBan = rs.getFloat("giaBan");
+				int namXuatBan = rs.getInt("namXuatBan");
+
+				Sach sach = new Sach(id, tenSach, giaBan, namXuatBan);
+
+				ketQua.add(sach);
+			}
+
+			// Bước 5: Ngắt kết nối cơ sở dữ liệu
+			JDBCUtil.closeConnection(con);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return ketQua;
 	}
 
 }
